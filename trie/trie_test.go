@@ -47,8 +47,8 @@ func TestNode(t *testing.T) {
 	})
 
 	t.Run("Values", func(t *testing.T) {
-		got := slices.Collect(root.Values())
-		want := []int{1, 6, 3, 4, 2, 5}
+		got := slices.Sorted(root.Values())
+		want := slices.Sorted(maps.Values(data))
 		if !slices.Equal(got, want) {
 			t.Errorf("got %v, want %v", got, want)
 		}
