@@ -1,0 +1,3 @@
+site/wasm_exec.js
+main.wasm
+wasi.wasm

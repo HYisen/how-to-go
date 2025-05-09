@@ -1,0 +1,31 @@
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <script src="wasm_exec.js"></script>
+    <script>
+        const go = new Go();
+        let plusOne;
+        WebAssembly.instantiateStreaming(fetch("main.wasm"), go.importObject).then((result) => {
+            go.run(result.instance);
+            plusOne = result.instance.exports.plus_one
+        });
+
+        function calculate() {
+            const num = Number(document.getElementById("num").value);
+            let result = plusOne(num);
+            document.getElementById("output").innerHTML = `${result}`;
+        }
+    </script>
+    <title>Go Wasm</title>
+</head>
+<body>
+<p>hint: F12 to see the std::cout to console</p>
+
+<label for="num">Input Number </label><input type="number" id="num" name="num" value="1"/>
+
+<button type="button" onclick="calculate()">Calculate</button>
+
+<p>result: </p>
+<p id="output">none</p>
+</body>
+</html>
